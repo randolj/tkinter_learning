@@ -22,6 +22,7 @@ def swap():
     else:
         button_status = 0
     title_creator()  # Update the title when the button is pressed
+    convert()
 
 
 def title_creator():
@@ -34,7 +35,7 @@ def title_creator():
 # window
 window = ttk.Window(themename='darkly')  # Use Tk() instead of ttk.Window
 window.title('Demo')
-window.geometry("350x150")
+window.geometry("350x175")
 
 # title
 title_label = ttk.Label(master=window, text='Miles to kilometers', font='Calibri 24 bold')
@@ -48,7 +49,14 @@ button = ttk.Button(master=input_frame, text='Convert', command=convert)
 entry.pack(side='left', padx=10)
 button.pack(side='left')
 
-input_frame.pack(pady=10)
+input_frame.pack(pady=5)
+
+
+# output
+output_string = tk.StringVar()
+output_label = ttk.Label(master=window, text='Output', font='Calibri 24', textvariable=output_string)
+output_label.pack(pady=5)
+
 
 swap_frame = ttk.Frame(master=window)
 
@@ -63,10 +71,6 @@ button2.image = swap_image
 button2.pack()
 swap_frame.pack()
 
-# output
-output_string = tk.StringVar()
-output_label = ttk.Label(master=window, text='Output', font='Calibri 24', textvariable=output_string)
-output_label.pack()
 
 # run
 window.mainloop()
