@@ -7,13 +7,17 @@ button_status = 0
 
 
 def convert():
-    input = entry_int.get()
-    if button_status == 0:
-        km_output = round(input * 1.61, 3)  # 1 mile = 1.61 km
-        output_string.set(km_output)
-    if button_status == 1:
-        mi_output = round(input / 1.61, 3)
-        output_string.set(mi_output)
+    try:
+        input = entry_int.get()
+        if button_status == 0:
+            km_output = round(input * 1.60934, 2)  # 1 mile = 1.61 km
+            output_string.set(km_output)
+        if button_status == 1:
+            mi_output = round(input / 1.60934, 2)
+            output_string.set(mi_output)
+    except tk.TclError:
+        output_string.set("Please input a number.")
+
 
 def swap():
     global button_status
@@ -27,34 +31,38 @@ def swap():
 
 def title_creator():
     if button_status == 0:
-        title_label.config(text='Miles to kilometers')
+        title_label.config(text="Miles to kilometers")
     elif button_status == 1:
-        title_label.config(text='Kilometers to miles')
+        title_label.config(text="Kilometers to miles")
 
 
 # window
-window = ttk.Window(themename='darkly')  # Use Tk() instead of ttk.Window
-window.title('Demo')
+window = ttk.Window(themename="darkly")  # Use Tk() instead of ttk.Window
+window.title("Demo")
 window.geometry("350x175")
 
 # title
-title_label = ttk.Label(master=window, text='Miles to kilometers', font='Calibri 24 bold')
+title_label = ttk.Label(
+    master=window, text="Miles to kilometers", font="Calibri 24 bold"
+)
 title_label.pack()
 
 # input field
 input_frame = ttk.Frame(master=window)
 entry_int = tk.IntVar()
 entry = ttk.Entry(master=input_frame, textvariable=entry_int)
-button = ttk.Button(master=input_frame, text='Convert', command=convert)
-entry.pack(side='left', padx=10)
-button.pack(side='left')
+button = ttk.Button(master=input_frame, text="Convert", command=convert)
+entry.pack(side="left", padx=10)
+button.pack(side="left")
 
 input_frame.pack(pady=5)
 
 
 # output
 output_string = tk.StringVar()
-output_label = ttk.Label(master=window, text='Output', font='Calibri 24', textvariable=output_string)
+output_label = ttk.Label(
+    master=window, text="Output", font="Calibri 24", textvariable=output_string
+)
 output_label.pack(pady=5)
 
 
